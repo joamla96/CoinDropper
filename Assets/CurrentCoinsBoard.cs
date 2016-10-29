@@ -2,34 +2,61 @@
 using System.Collections;
 
 public class CurrentCoinsBoard : MonoBehaviour {
-	public int[]Coins;
+	private int[] Coins = new int[2];
 
-	private int[][] oldPos;
-	private int[][] newPos;
+	private int[,] oldPos = new int[2,2];
+	private int[,] newPos = new int[2,2];
 
 	// Use this for initialization
 	void Start() {
-		oldPos[0] = new int[] {0, 0};
-		oldPos[1] = new int[] {0, 1};
+		oldPos[0,0] = 0;
+		oldPos[0,1] = 0;
 
-		newPos = oldPos;
+		oldPos[1,0] = 0;
+		oldPos[1,1] = 1;
+		Debug.Log("CCB Start");
+		Debug.Log("OldPos1 Values: " + oldPos[0, 0] + " | " + oldPos[0, 1]);
+		Debug.Log("OldPos2 Values: " + oldPos[1, 0] + " | " + oldPos[1, 1]);
+
+		setNewPos(oldPos);
+
+		Debug.Log("OldPos1 Values: " + oldPos[0, 0] + " | " + oldPos[0, 1]);
+		Debug.Log("OldPos2 Values: " + oldPos[1, 0] + " | " + oldPos[1, 1]);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+	}
+
+	public void setCoins(int[] Coins) {
+		Debug.Log("Coin Values: " + Coins[0] + " | "+ Coins[1]);
+		this.Coins[0] = Coins[0];
+		this.Coins[1] = Coins[1];
+	}
+
+	public void setNewPos(int[,] Pos) {
+		this.newPos[0, 0] = Pos[0, 0];
+		this.newPos[0, 1] = Pos[0, 1];
+		this.newPos[1, 0] = Pos[1, 0];
+		this.newPos[1, 1] = Pos[1, 1];
 	}
 
 	public void UpdateCurrentCoins() {
-		GameObject OldCoin0 = GameObject.Find("/Current/Coin" + oldPos[0][0] + oldPos[0][1]);
-		GameObject OldCoin1 = GameObject.Find("/Current/Coin" + oldPos[1][0] + oldPos[1][1]);
+		Debug.Log("NewPos1 Values: " + newPos[0, 0] + " | " + newPos[0, 1]);
+		Debug.Log("NewPos2 Values: " + newPos[1, 0] + " | " + newPos[1, 1]);
 
-		GameObject NewCoin0 = GameObject.Find("/Current/Coin" + newPos[1][0] + newPos[1][1]);
-		GameObject NewCoin1 = GameObject.Find("/Current/Coin" + newPos[1][0] + newPos[1][1]);
+		Debug.Log("Update: OldPos1 Values: " + oldPos[0, 0] + " | " + oldPos[0, 1]);
+		Debug.Log("Update: OldPos2 Values: " + oldPos[1, 0] + " | " + oldPos[1, 1]);
+
+		GameObject OldCoin0 = GameObject.Find("/Current/Coin" + oldPos[0,0] + oldPos[0,1]);
+		GameObject OldCoin1 = GameObject.Find("/Current/Coin" + oldPos[1,0] + oldPos[1,1]);
+
+		GameObject NewCoin0 = GameObject.Find("/Current/Coin" + newPos[0,0] + newPos[0,1]);
+		GameObject NewCoin1 = GameObject.Find("/Current/Coin" + newPos[1,0] + newPos[1,1]);
 
 		OldCoin1.GetComponent<Coin>().Value = 0;
-		OldCoin1.GetComponent<Coin>().Value = 0;
-
+		OldCoin0.GetComponent<Coin>().Value = 0;
+		Debug.Log("Coin Values: " + Coins[0] + " | " + Coins[1]);
 		NewCoin0.GetComponent<Coin>().Value = Coins[0];
 		NewCoin1.GetComponent<Coin>().Value = Coins[1];
 	}

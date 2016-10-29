@@ -25,19 +25,16 @@ public class Main : MonoBehaviour {
 				Grid[x, y] = gO;
 			}
 		}
-
-		NCB.Coins = new int[2] { 1, 3 };
-		CCB.Coins = NCB.Coins;
-		CCB.UpdateCurrentCoins();
-
-		NCB.Coins = findNextCoins();
-		NCB.UpdateNextCoins();
 	}
 	
 
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown("space")) {
+			NCB.Coins = new int[2] { 1, 3 };
+			CCB.setCoins(NCB.Coins);
+			CCB.UpdateCurrentCoins();
+
 			NCB.Coins = findNextCoins();
 			NCB.UpdateNextCoins();
 		}
