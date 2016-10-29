@@ -26,19 +26,21 @@ public class Main : MonoBehaviour {
 			}
 		}
 
-		NCB.Coins = findNextCoins();
-		NCB.UpdateNextCoins();
-
+		NCB.Coins = new int[2] { 1, 3 };
 		CCB.Coins = NCB.Coins;
 		CCB.UpdateCurrentCoins();
 
-		NCB.Coins = findNextCoins();
+		//NCB.Coins = findNextCoins();
 		NCB.UpdateNextCoins();
 	}
 	
 
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown("space")) {
+			NCB.Coins = findNextCoins();
+			NCB.UpdateNextCoins();
+		}
 
 	}
 
@@ -85,8 +87,9 @@ public class Main : MonoBehaviour {
 	int[] findNextCoins() {
 		System.Random rnd = new System.Random();
 		int[] Coins = new int[2];
-		Coins[0] = rnd.Next(1, 3);
-		Coins[1] = rnd.Next(1, 3);
+		Coins[0] = rnd.Next(1, 4);
+		Coins[1] = rnd.Next(1, 4);
+
 		return Coins;
 	}
 

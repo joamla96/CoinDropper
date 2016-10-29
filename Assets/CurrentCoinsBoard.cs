@@ -15,7 +15,7 @@ public class CurrentCoinsBoard : MonoBehaviour {
 
 	public void UpdateCurrentCoins() {
 		GameObject Coin0 = GameObject.Find("/Current/Coin00");
-		GameObject Coin1 = GameObject.Find("/Current/Coin10");
+		GameObject Coin1 = GameObject.Find("/Current/Coin01");
 
 		Coin0.GetComponent<Coin>().Value = Coins[0];
 		Coin1.GetComponent<Coin>().Value = Coins[1];
