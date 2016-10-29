@@ -11,11 +11,14 @@ public class Main : MonoBehaviour {
 	private int BoardWidth = 5;
 	private int BoardHeight = 5;
 
-	private int[] CurrentCoins;
-	private int[] NextCoins;
+	NextCoinsBoard NCB;
+	CurrentCoinsBoard CCB;
 
 	// Use this for initialization
 	void Start () {
+		NCB = gameObject.GetComponent<NextCoinsBoard>();
+		CCB = gameObject.GetComponent<CurrentCoinsBoard>();
+
 		for (int x = 0; x < BoardWidth; x++) {
 			for (int y = 0; y < BoardHeight; y++) {
 				GameObject gO = Instantiate(GO, new Vector2(x,y), Quaternion.identity) as GameObject;
@@ -23,15 +26,20 @@ public class Main : MonoBehaviour {
 			}
 		}
 
-		NextCoins = findNextCoins();
-		UpdateNextCoins();
-		UpdateCurrentCoins();
+		NCB.Coins = findNextCoins();
+		NCB.UpdateNextCoins();
+
+		CCB.Coins = NCB.Coins;
+		CCB.UpdateCurrentCoins();
+
+		NCB.Coins = findNextCoins();
+		NCB.UpdateNextCoins();
 	}
 	
 
 	// Update is called once per frame
 	void Update () {
-		DropAll();
+
 	}
 
 	void setType(int x, int y, int Value) {
@@ -77,27 +85,10 @@ public class Main : MonoBehaviour {
 	int[] findNextCoins() {
 		System.Random rnd = new System.Random();
 		int[] Coins = new int[2];
-		Coins[0] = rnd.Next(1,3);
+		Coins[0] = rnd.Next(1, 3);
 		Coins[1] = rnd.Next(1, 3);
 		return Coins;
 	}
 
-	void UpdateNextCoins() {
-		GameObject Coin0 = GameObject.Find("/Next/Coin0");
-		GameObject Coin1 = GameObject.Find("/Next/Coin1");
 
-		Coin0.GetComponent<Coin>().Value = NextCoins[0];
-		Coin1.GetComponent<Coin>().Value = NextCoins[1];
-	}
-
-	void UpdateCurrentCoins() {
-		this.CurrentCoins = this.NextCoins;
-		this.NextCoins = findNextCoins();
-	
-		GameObject Coin0 = GameObject.Find("/Current/Coin00");
-		GameObject Coin1 = GameObject.Find("/Current/Coin10");
-
-		Coin0.GetComponent<Coin>().Value = CurrentCoins[0];
-		Coin1.GetComponent<Coin>().Value = CurrentCoins[1];
-	}
 }
