@@ -23,11 +23,12 @@ public class Main : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		Grid[3, 3].GetComponent<Renderer>().material = CoinMaterials[1];
-		setType(3,4, CoinMaterials[2]);
+		setType(3,4, 1);
 	}
 
-	void setType(int x, int y, Material Material) {
-		Grid[x, y].GetComponent<Renderer>().material = Material;
+	void setType(int x, int y, int Value) {
+		Grid[x, y].GetComponent<Coin>().Value = Value;
 	}
+
+
 }
