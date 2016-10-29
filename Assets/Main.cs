@@ -20,6 +20,7 @@ public class Main : MonoBehaviour {
 		}
 	}
 	
+
 	// Update is called once per frame
 	void Update () {
 		Grid[3, 3].GetComponent<Renderer>().material = CoinMaterials[1];
