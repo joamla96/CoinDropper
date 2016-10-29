@@ -11,6 +11,9 @@ public class Main : MonoBehaviour {
 	private int BoardWidth = 5;
 	private int BoardHeight = 5;
 
+	private int[] CurrentCoins;
+	private int[] NextCoins;
+
 	// Use this for initialization
 	void Start () {
 		for (int x = 0; x < BoardWidth; x++) {
@@ -20,8 +23,8 @@ public class Main : MonoBehaviour {
 			}
 		}
 
-		setType(3, 3, 1);
-		setType(3, 4, 2);
+		NextCoins = findNextCoins();
+		UpdateNextCoins();
 	}
 	
 
@@ -68,5 +71,21 @@ public class Main : MonoBehaviour {
 				dropCoinToBottom(x,y);
 			}
 		}
+	}
+
+	int[] findNextCoins() {
+		System.Random rnd = new System.Random();
+		int[] Coins = new int[2];
+		Coins[0] = rnd.Next(1,3);
+		Coins[1] = rnd.Next(1, 3);
+		return Coins;
+	}
+
+	void UpdateNextCoins() {
+		GameObject Coin0 = GameObject.Find("/Next/Coin0");
+		GameObject Coin1 = GameObject.Find("/Next/Coin1");
+
+		Coin0.GetComponent<Coin>().Value = NextCoins[0];
+		Coin1.GetComponent<Coin>().Value = NextCoins[1];
 	}
 }
