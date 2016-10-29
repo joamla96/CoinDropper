@@ -30,7 +30,7 @@ public class Main : MonoBehaviour {
 		CCB.Coins = NCB.Coins;
 		CCB.UpdateCurrentCoins();
 
-		//NCB.Coins = findNextCoins();
+		NCB.Coins = findNextCoins();
 		NCB.UpdateNextCoins();
 	}
 	
