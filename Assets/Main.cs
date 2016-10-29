@@ -22,15 +22,12 @@ public class Main : MonoBehaviour {
 
 		setType(3, 3, 1);
 		setType(3, 4, 2);
-		dropCoinToBottom(3, 4);
-		dropCoinToBottom(3, 3);
-		dropCoinToBottom(3, 4);
 	}
 	
 
 	// Update is called once per frame
 	void Update () {
-
+		DropAll();
 	}
 
 	void setType(int x, int y, int Value) {
@@ -62,6 +59,14 @@ public class Main : MonoBehaviour {
 	void dropCoinToBottom(int x, int y) {
 		while(dropCoin(x,y)) {
 			y--;
+		}
+	}
+
+	void DropAll() {
+		for (int x = 0; x < BoardWidth; x++) {
+			for (int y = 0; y < BoardHeight; y++) {
+				dropCoinToBottom(x,y);
+			}
 		}
 	}
 }
