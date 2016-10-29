@@ -25,6 +25,7 @@ public class Main : MonoBehaviour {
 
 		NextCoins = findNextCoins();
 		UpdateNextCoins();
+		UpdateCurrentCoins();
 	}
 	
 
@@ -87,5 +88,16 @@ public class Main : MonoBehaviour {
 
 		Coin0.GetComponent<Coin>().Value = NextCoins[0];
 		Coin1.GetComponent<Coin>().Value = NextCoins[1];
+	}
+
+	void UpdateCurrentCoins() {
+		this.CurrentCoins = this.NextCoins;
+		this.NextCoins = findNextCoins();
+	
+		GameObject Coin0 = GameObject.Find("/Current/Coin00");
+		GameObject Coin1 = GameObject.Find("/Current/Coin10");
+
+		Coin0.GetComponent<Coin>().Value = CurrentCoins[0];
+		Coin1.GetComponent<Coin>().Value = CurrentCoins[1];
 	}
 }
