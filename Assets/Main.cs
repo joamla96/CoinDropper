@@ -30,5 +30,7 @@ public class Main : MonoBehaviour {
 		Grid[x, y].GetComponent<Coin>().Value = Value;
 	}
 
-
+	int getType(int x, int y) {
+		return Grid[x, y].GetComponent<Coin>().Value;
+	}
 }
