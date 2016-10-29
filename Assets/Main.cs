@@ -38,7 +38,6 @@ public class Main : MonoBehaviour {
 			NCB.Coins = findNextCoins();
 			NCB.UpdateNextCoins();
 		}
-
 	}
 
 	void setType(int x, int y, int Value) {
