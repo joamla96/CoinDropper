@@ -104,7 +104,18 @@ public class CurrentCoinsBoard : MonoBehaviour {
 	}
 
 	public void MoveRotate() {
+		if(newPos[0,1] == newPos[1,1]) {
+			if (newPos[0, 1] == this.BoardWidth - 1 || newPos[1, 1] == this.BoardWidth - 1) {
+				MoveLeft();
+			}
+			newPos[1, 0] = 0;
+			newPos[1, 1]++;
+		} else {
+			newPos[1, 1]--;
+			newPos[1, 0] = 1;
+		}
 
+		UpdateCurrentCoins();
 	}
 
 
