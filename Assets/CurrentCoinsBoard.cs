@@ -7,6 +7,12 @@ public class CurrentCoinsBoard : MonoBehaviour {
 	private int[,] oldPos = new int[2,2];
 	private int[,] newPos = new int[2,2];
 
+	private int BoardWidth;
+
+	public void setWidth(int Width) {
+		this.BoardWidth = Width;
+	}
+
 	// Use this for initialization
 	void Start() {
 		oldPos[0,0] = 0;
@@ -23,17 +29,20 @@ public class CurrentCoinsBoard : MonoBehaviour {
 		Debug.Log("OldPos1 Values: " + oldPos[0, 0] + " | " + oldPos[0, 1]);
 		Debug.Log("OldPos2 Values: " + oldPos[1, 0] + " | " + oldPos[1, 1]);
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
+	void Update() {
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 			MoveRight();
 
-		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
 			MoveLeft();
+		}
 
-		if (Input.GetKeyDown(KeyCode.UpArrow))
+		if (Input.GetKeyDown(KeyCode.UpArrow)) {
 			MoveRotate();
+		}
+	}
 
 	public void setCoins(int[] Coins) {
 		Debug.Log("Coin Values: " + Coins[0] + " | "+ Coins[1]);
@@ -78,14 +87,19 @@ public class CurrentCoinsBoard : MonoBehaviour {
 	}
 
 	public void MoveLeft() {
-		newPos[0, 1]--;
-		newPos[1, 1]--;
+		if(newPos[0, 1] >= 1 && newPos[1, 1] >= 1) {
+			newPos[0, 1]--;
+			newPos[1, 1]--;
+		} 
+
 		UpdateCurrentCoins();
 	}
 
 	public void MoveRight() {
-		newPos[0, 1]++;
-		newPos[1, 1]++;
+		if (newPos[0, 1] <= this.BoardWidth-2 && newPos[1, 1] <= this.BoardWidth-2) {
+			newPos[0, 1]++;
+			newPos[1, 1]++;
+		}
 		UpdateCurrentCoins();
 	}
 

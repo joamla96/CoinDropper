@@ -19,6 +19,8 @@ public class Main : MonoBehaviour {
 		NCB = gameObject.GetComponent<NextCoinsBoard>();
 		CCB = gameObject.GetComponent<CurrentCoinsBoard>();
 
+		CCB.setWidth(BoardWidth);
+
 		for (int x = 0; x < BoardWidth; x++) {
 			for (int y = 0; y < BoardHeight; y++) {
 				GameObject gO = Instantiate(GO, new Vector2(x,y), Quaternion.identity) as GameObject;
