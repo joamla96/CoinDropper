@@ -3,9 +3,9 @@ Hackathron
 
 Simple Tetris / 2048 like game.
 
-Move left and right with arrow keys
-Up Arrow to rotate
-Down Arrow to drop
+Move left and right with arrow keys.
+Up Arrow to rotate.
+Down Arrow to drop.
 
 If 3 or more objects have the same colour/value next to each other, they will combine to form the higher tier.
 
