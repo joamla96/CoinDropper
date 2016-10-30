@@ -41,6 +41,8 @@ public class Main : MonoBehaviour {
 			List<int[]> List = new List<int[]>();
 			FindConnected(List, 0, 0, getType(0, 0));
 
+			if(List.Count >= 3) CombineCoins(List);
+
 			Debug.Log("List Length: " + List.Count);
 
 			BoardUpdated = false;
@@ -121,6 +123,19 @@ public class Main : MonoBehaviour {
 		List = FindConnected(List, x, y + 1, Value);
 
 		return List;
+	}
+
+	void CombineCoins(List<int[]> List) {
+		bool firstEntry = true;
+
+		foreach (int[] Pos in List) {
+			if(firstEntry) {
+				setType(Pos[1], Pos[0], getType(Pos[1], Pos[0]) + 1);
+				firstEntry = false;
+			} else {
+				setType(Pos[1], Pos[0], 0);
+			}
+		}
 	}
 
 	private void UpdateCoins() {
