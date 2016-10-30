@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class Main : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class Main : MonoBehaviour {
 
 	private int BoardWidth = 5;
 	private int BoardHeight = 5;
+
+	private bool BoardUpdated = false;
 
 	NextCoinsBoard NCB;
 	CurrentCoinsBoard CCB;
@@ -32,6 +35,17 @@ public class Main : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (BoardUpdated) {
+			Debug.Log("getType: " + getType(0, 0));
+
+			List<int[]> List = new List<int[]>();
+			FindConnected(List, 0, 0, getType(0, 0));
+
+			Debug.Log("List Length: " + List.Count);
+
+			BoardUpdated = false;
+		}
+
 		if (Input.GetKeyDown("space")) {
 			NCB.Coins = new int[2] { 1, 3 };
 			CCB.setCoins(NCB.Coins);
@@ -39,6 +53,10 @@ public class Main : MonoBehaviour {
 
 			NCB.Coins = findNextCoins();
 			NCB.UpdateNextCoins();
+
+			List<int[]> List = new List<int[]>();
+			List.Add(new int[2] { 0, 0 });
+			Debug.Log(inList(List, 0,0));
 		}
 
 		if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -63,7 +81,46 @@ public class Main : MonoBehaviour {
 			DropAll();
 
 			UpdateCoins();
+			BoardUpdated = true;
 		}
+	}
+
+	bool ofType(int Value, int x, int y) {
+		Debug.Log("Comparing getType and value: "+ getType(x, y)+" == "+Value);
+		if (getType(x, y) == Value) return true;
+		else return false;
+	}
+
+	bool insideBoard(int x, int y) {
+		try {
+			getType(x, y);
+			return true;
+		} catch(IndexOutOfRangeException) {
+			return false;
+		}
+	}
+
+	bool inList(List<int[]> List, int x, int y) {
+		foreach(int[] Pos in List) {
+			if (Pos[0] == y && Pos[1] == x) return true;
+		}
+
+		return false;
+	}
+
+	List<int[]> FindConnected(List<int[]> List, int x,int y, int Value) {
+		if (!insideBoard(x, y)) return List;
+		if (inList(List, x,y)) return List;
+		if (!ofType(Value, x, y)) return List;
+		Debug.Log("Checking xy: " + x +" | "+ y);
+
+		List.Add(new int[2] { y, x });
+		List = FindConnected(List, x - 1, y, Value);
+		List = FindConnected(List, x + 1, y, Value);
+		List = FindConnected(List, x, y - 1, Value);
+		List = FindConnected(List, x, y + 1, Value);
+
+		return List;
 	}
 
 	private void UpdateCoins() {

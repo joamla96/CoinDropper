@@ -20,14 +20,14 @@ public class CurrentCoinsBoard : MonoBehaviour {
 
 		oldPos[1,0] = 0;
 		oldPos[1,1] = 1;
-		Debug.Log("CCB Start");
-		Debug.Log("OldPos1 Values: " + oldPos[0, 0] + " | " + oldPos[0, 1]);
-		Debug.Log("OldPos2 Values: " + oldPos[1, 0] + " | " + oldPos[1, 1]);
+		//Debug.Log("CCB Start");
+		//Debug.Log("OldPos1 Values: " + oldPos[0, 0] + " | " + oldPos[0, 1]);
+		//Debug.Log("OldPos2 Values: " + oldPos[1, 0] + " | " + oldPos[1, 1]);
 
 		setNewPos(oldPos);
 
-		Debug.Log("OldPos1 Values: " + oldPos[0, 0] + " | " + oldPos[0, 1]);
-		Debug.Log("OldPos2 Values: " + oldPos[1, 0] + " | " + oldPos[1, 1]);
+		//Debug.Log("OldPos1 Values: " + oldPos[0, 0] + " | " + oldPos[0, 1]);
+		//Debug.Log("OldPos2 Values: " + oldPos[1, 0] + " | " + oldPos[1, 1]);
 	}
 
 	// Update is called once per frame
@@ -36,7 +36,7 @@ public class CurrentCoinsBoard : MonoBehaviour {
 	}
 
 	public void setCoins(int[] Coins) {
-		Debug.Log("Coin Values: " + Coins[0] + " | "+ Coins[1]);
+		//Debug.Log("Coin Values: " + Coins[0] + " | "+ Coins[1]);
 		this.Coins[0] = Coins[0];
 		this.Coins[1] = Coins[1];
 	}
@@ -66,11 +66,11 @@ public class CurrentCoinsBoard : MonoBehaviour {
 	}
 
 	public void UpdateCurrentCoins() {
-		Debug.Log("NewPos1 Values: " + newPos[0, 0] + " | " + newPos[0, 1]);
-		Debug.Log("NewPos2 Values: " + newPos[1, 0] + " | " + newPos[1, 1]);
+		//Debug.Log("NewPos1 Values: " + newPos[0, 0] + " | " + newPos[0, 1]);
+		//Debug.Log("NewPos2 Values: " + newPos[1, 0] + " | " + newPos[1, 1]);
 
-		Debug.Log("Update: OldPos1 Values: " + oldPos[0, 0] + " | " + oldPos[0, 1]);
-		Debug.Log("Update: OldPos2 Values: " + oldPos[1, 0] + " | " + oldPos[1, 1]);
+		//Debug.Log("Update: OldPos1 Values: " + oldPos[0, 0] + " | " + oldPos[0, 1]);
+		//Debug.Log("Update: OldPos2 Values: " + oldPos[1, 0] + " | " + oldPos[1, 1]);
 
 		GameObject OldCoin0 = GameObject.Find("/Current/Coin" + oldPos[0,0] + oldPos[0,1]);
 		GameObject OldCoin1 = GameObject.Find("/Current/Coin" + oldPos[1,0] + oldPos[1,1]);
@@ -80,7 +80,7 @@ public class CurrentCoinsBoard : MonoBehaviour {
 
 		OldCoin1.GetComponent<Coin>().Value = 0;
 		OldCoin0.GetComponent<Coin>().Value = 0;
-		Debug.Log("Coin Values: " + Coins[0] + " | " + Coins[1]);
+		//Debug.Log("Coin Values: " + Coins[0] + " | " + Coins[1]);
 		NewCoin0.GetComponent<Coin>().Value = Coins[0];
 		NewCoin1.GetComponent<Coin>().Value = Coins[1];
 
