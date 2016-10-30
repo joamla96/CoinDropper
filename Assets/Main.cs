@@ -56,9 +56,27 @@ public class Main : MonoBehaviour {
 			int[] Pos1 = CCB.getNewPos(1);
 			int[] Pos0 = CCB.getNewPos(0);
 
-			addCoin(Pos1[1], CCB.getCoinValue(1));
+			if (!addCoin(Pos1[1], CCB.getCoinValue(1))) GameOver();
 			DropAll();
+
+			if (!addCoin(Pos0[1], CCB.getCoinValue(0))) GameOver();
+			DropAll();
+
+			UpdateCoins();
 		}
+	}
+
+	private void UpdateCoins() {
+		CCB.setCoins(NCB.Coins);
+		CCB.UpdateCurrentCoins();
+
+		NCB.Coins = findNextCoins();
+		NCB.UpdateNextCoins();
+	}
+
+	private void GameOver() {
+		Time.timeScale = 0;
+		Debug.Log("Game over");
 	}
 
 	void setType(int x, int y, int Value) {
