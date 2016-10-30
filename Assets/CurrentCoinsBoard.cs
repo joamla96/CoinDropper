@@ -32,16 +32,7 @@ public class CurrentCoinsBoard : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.RightArrow))
-			MoveRight();
 
-		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-			MoveLeft();
-		}
-
-		if (Input.GetKeyDown(KeyCode.UpArrow)) {
-			MoveRotate();
-		}
 	}
 
 	public void setCoins(int[] Coins) {
@@ -55,6 +46,16 @@ public class CurrentCoinsBoard : MonoBehaviour {
 		this.newPos[0, 1] = Pos[0, 1];
 		this.newPos[1, 0] = Pos[1, 0];
 		this.newPos[1, 1] = Pos[1, 1];
+	}
+
+	public int[] getNewPos(int ID) {
+		int[] pos = new int[] { this.newPos[ID, 0], this.newPos[ID, 1] };
+		return pos;
+	} 
+
+	public int getCoinValue(int ID) {
+		GameObject NewCoin0 = GameObject.Find("/Current/Coin" + newPos[ID, 0] + newPos[ID, 1]);
+		return NewCoin0.GetComponent<Coin>().Value;
 	}
 
 	public void setOldPos(int[,] Pos) {

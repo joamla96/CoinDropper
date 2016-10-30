@@ -40,6 +40,25 @@ public class Main : MonoBehaviour {
 			NCB.Coins = findNextCoins();
 			NCB.UpdateNextCoins();
 		}
+
+		if (Input.GetKeyDown(KeyCode.RightArrow))
+			CCB.MoveRight();
+
+		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+			CCB.MoveLeft();
+		}
+
+		if (Input.GetKeyDown(KeyCode.UpArrow)) {
+			CCB.MoveRotate();
+		}
+
+		if (Input.GetKeyDown(KeyCode.DownArrow)) {
+			int[] Pos1 = CCB.getNewPos(1);
+			int[] Pos0 = CCB.getNewPos(0);
+
+			addCoin(Pos1[1], CCB.getCoinValue(1));
+			DropAll();
+		}
 	}
 
 	void setType(int x, int y, int Value) {
@@ -80,6 +99,13 @@ public class Main : MonoBehaviour {
 				dropCoinToBottom(x,y);
 			}
 		}
+	}
+
+	public bool addCoin(int x, int Value) {
+		if (getType(x, BoardHeight - 1) == 0) {
+			setType(x, BoardHeight - 1, Value);
+			return true;
+		} else return false;
 	}
 
 	int[] findNextCoins() {
